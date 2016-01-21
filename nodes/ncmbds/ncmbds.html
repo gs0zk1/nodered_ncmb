@@ -1,0 +1,46 @@
+<script type="text/javascript">
+    RED.nodes.registerType('ncmbds',{
+        category: 'NIFTY Cloud',
+        color: '#3FADB5',
+        defaults: {
+            name: {value:""},
+            appkey: {value:"", required:true},
+            clikey: {value:"", required:true},
+            classname: {value:"", required:true},
+            fieldname: {value:"", required:true}
+        },
+        inputs:1,
+        outputs:0,
+        icon: "db.png",
+        label: function() {
+            return this.name||this.appkey||this.clikey||this.classname||this.fieldname||"ncmbds";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="ncmbds">
+    <div class="form-row">
+        <label for="node-input-name">Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <br/>
+    <div class="form-row">
+        <label for="node-input-appkey">APP-Key</label>
+        <input type="text" id="node-input-appkey" placeholder="APPKey">
+    </div>
+    <div class="form-row">
+        <label for="node-input-clikey">Clinet-Key</label>
+        <input type="text" id="node-input-clikey" placeholder="CLIKey">
+    </div>
+
+    <br/>
+    <div class="form-row">
+        <label for="node-input-classname">ClassName</label>
+        <input type="text" id="node-input-classname" placeholder="ClassName">
+    </div>
+    <div class="form-row">
+        <label for="node-input-fieldname">FieldName</label>
+        <input type="text" id="node-input-fieldname" placeholder="FieldName">
+    </div>
+</script>
