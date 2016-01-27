@@ -17,6 +17,15 @@ module.exports = function(RED) {
             var ncmbClass = new NCMBClass();
             ncmbClass.set(this.fieldname, msg.payload);
             ncmbClass.save();
+            //Send push
+            if (msg.payload == 0) {
+                var push = new ncmb.Push();
+                push.set("immediateDeliveryFlag", true)
+                    .set("message", "Door is opened")
+                    .set("target", ["android"]);
+                push.send();
+            }
+
             node.send(msg);
         });
     }
