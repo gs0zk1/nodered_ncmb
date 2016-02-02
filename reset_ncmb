@@ -1,0 +1,6 @@
+#!/bin/bash
+# My first script
+
+pm2 stop node-red
+cp /root/.node-red/nodered_ncmb/flows_raspberrypi.json /root/.node-red/flows_raspberrypi.json
+pm2 start node-red
