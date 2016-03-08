@@ -1,0 +1,20 @@
+#!/bin/bash
+# My first script
+
+wget http://node-arm.herokuapp.com/node_archive_armhf.deb
+sudo dpkg -i node_archive_armhf.deb
+npm -g install node-red
+cd /root/.node-red
+git clone https://github.com/ncmbadmin/nodered_ncmb.git
+cd nodered_ncmb/nodes
+npm -g install .
+node-red --max-old-space-size=128 -v
+sudo npm install -g pm2
+pm2 start /usr/local/bin/node-red --node-args="--max-old-space-size=128" -- -v
+pm2 info node-red
+pm2 save
+pm2 startup
+export PATH=$PATH:/root/.node-red/nodered_ncmb
+echo "export PATH=$PATH:/root/.node-red/nodered_ncmb" >> ~/.bashrc
+chmod 755 /root/.node-red/nodered_ncmb/reset_ncmb
+reset_ncmb
