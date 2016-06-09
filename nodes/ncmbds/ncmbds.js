@@ -29,16 +29,17 @@ module.exports = function(RED) {
             if(this.sendpush == "yes") {
               var push = new ncmb.Push();
               if( (this.sendtimeopen == true) && (msg.payload = "0" )) {
-              if (this.sendtimeopen == true) {
-                  push.set("immediateDeliveryFlag", true)
-                      .set("message", "Door is opened now")
-                      .set("target", ["ios", "android"]);
-                  push.send();
-              } else if ( (this.sendtimeclose == true) && (msg.payload = "1")) {
-                  push.set("immediateDeliveryFlag", true)
-                      .set("message", "Door is closed now")
-                      .set("target", ["ios", "android"]);
-                  push.send();
+                  if (this.sendtimeopen == true) {
+                      push.set("immediateDeliveryFlag", true)
+                          .set("message", "Door is opened now")
+                          .set("target", ["ios", "android"]);
+                      push.send();
+                  } else if ( (this.sendtimeclose == true) && (msg.payload = "1")) {
+                      push.set("immediateDeliveryFlag", true)
+                          .set("message", "Door is closed now")
+                          .set("target", ["ios", "android"]);
+                      push.send();
+                  }
               }
             }
             node.send(msg);
