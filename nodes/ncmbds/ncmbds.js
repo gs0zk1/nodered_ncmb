@@ -44,18 +44,16 @@ module.exports = function(RED) {
               }
 
               //2.2 setup push message
-              if( (this.sendtimeopen == true) && (msg.payload == 0 )) {
-                  if (this.sendtimeopen == true) {
-                      push.set("immediateDeliveryFlag", true)
-                          .set("message", "Door is opened now")
-                          .set("target", target);
-                      push.send();
-                  } else if ( (this.sendtimeclose == true) && (msg.payload == 1)) {
-                      push.set("immediateDeliveryFlag", true)
-                          .set("message", "Door is closed now")
-                          .set("target", target);
-                      push.send();
-                  }
+              if ((this.sendtimeopen == true) && (msg.payload == 0 )) {
+                  push.set("immediateDeliveryFlag", true)
+                      .set("message", "Door is opened now")
+                      .set("target", target);
+                  push.send();
+              } else if ((this.sendtimeclose == true) && (msg.payload == 1)) {
+                  push.set("immediateDeliveryFlag", true)
+                      .set("message", "Door is closed now")
+                      .set("target", target);
+                  push.send();
               }
             }
             node.send(msg);
