@@ -7,13 +7,18 @@
             appkey: {value:"", required:true},
             clikey: {value:"", required:true},
             classname: {value:"", required:true},
-            fieldname: {value:"", required:true}
+            fieldname: {value:"", required:true},
+            sendpush: {value:"", required:true},
+            sendtimeopen: {value:"", required:true},
+            sendtimeclose: {value:"", required:true},
+            sendandroid: {value:"", required:true},
+            sendios: {value:"", required:true}
         },
         inputs:1,
         outputs:0,
         icon: "db.png",
         label: function() {
-            return this.name||this.appkey||this.clikey||this.classname||this.fieldname||"ncmbds";
+            return this.name||"ncmbds";
         }
     });
 </script>
@@ -42,5 +47,23 @@
     <div class="form-row">
         <label for="node-input-fieldname">FieldName</label>
         <input type="text" id="node-input-fieldname" placeholder="FieldName">
+    </div>
+    <br/>
+    <div class="form-row">
+        <label for="node-input-sendpush">SendPush</label>
+        <select name="node-input-sendpush" id="node-input-sendpush">
+            <option value="no" >No</option>
+            <option value="yes" >Yes</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-sendtime">PushTiming</label>
+        <input type="checkbox" id="node-input-sendtimeopen"  name="node-input-sendpush" value="open" checked="checked" style="display: inline-block; width: auto; vertical-align: top;">Open</input>
+        <input type="checkbox" id="node-input-sendtimeclose"  name="node-input-sendpush" value="close" style="display: inline-block; width: auto; vertical-align: top;">Close</input>
+    </div>
+    <div class="form-row">
+        <label for="node-input-sendtime">PushDevice</label>
+        <input type="checkbox" id="node-input-sendandroid"  name="node-input-sendandroid" value="android" checked="checked" style="display: inline-block; width: auto; vertical-align: top;">Android</input>
+        <input type="checkbox" id="node-input-sendios"  name="node-input-sendios" value="ios" style="display: inline-block; width: auto; vertical-align: top;">iOS</input>
     </div>
 </script>
