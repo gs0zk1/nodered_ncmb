@@ -12,6 +12,8 @@ module.exports = function(RED) {
         this.sendpush = config.sendpush;
         this.sendtimeopen = config.sendtimeopen;
         this.sendtimeclose = config.sendtimeclose;
+        this.sendandroid = config.sendandroid;
+        this.sendios = config.sendios;
 
         var node = this;
 
@@ -28,16 +30,30 @@ module.exports = function(RED) {
 　　　　　　　//(２) NCMBにプッシュ通知を登録
             if(this.sendpush == "yes") {
               var push = new ncmb.Push();
+
+              //2.1 setup target
+              var target = [];
+              if (this.sendandroid ^ this.sendios) {
+                if (this.sendandroid) {
+                  target = ["android"];
+                }else if (this.sendios) {
+                  target = ["ios"];
+                }
+              } else {
+                target = ["android","ios"];
+              }
+
+              //2.2 setup push message
               if( (this.sendtimeopen == true) && (msg.payload = "0" )) {
                   if (this.sendtimeopen == true) {
                       push.set("immediateDeliveryFlag", true)
                           .set("message", "Door is opened now")
-                          .set("target", ["ios", "android"]);
+                          .set("target", target);
                       push.send();
                   } else if ( (this.sendtimeclose == true) && (msg.payload = "1")) {
                       push.set("immediateDeliveryFlag", true)
                           .set("message", "Door is closed now")
-                          .set("target", ["ios", "android"]);
+                          .set("target", target);
                       push.send();
                   }
               }
