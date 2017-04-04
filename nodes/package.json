@@ -5,11 +5,10 @@
     "keywords": [ "node-red" ],
     "node-red"     : {
        "nodes": {
-          "ncmbds": "ncmbds/ncmbds.js" 
+          "ncmbds": "ncmbds/ncmbds.js"
        }
     },
     "dependencies": {
-      "ncmb": "~2.0.2" 
+      "ncmb": "~2.0.2"
     }
 }
-

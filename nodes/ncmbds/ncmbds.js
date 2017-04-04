@@ -5,8 +5,8 @@ module.exports = function(RED) {
     function NCMBDataStore(config) {
 
         RED.nodes.createNode(this,config);
-        this.appkey = config.appkey;
-        this.clikey = config.clikey;
+        this.applicationkey = config.applicationkey;
+        this.clientkey = config.clientkey;
         this.classname = config.classname;
         this.fieldname = config.fieldname;
         this.sendpush = config.sendpush;
@@ -19,7 +19,7 @@ module.exports = function(RED) {
 
         this.on('input', function(msg) {
             // 0. NCMBの初期化
-            var ncmb = new NCMB(this.appkey, this.clikey);
+            var ncmb = new NCMB(this.applicationkey, this.clientkey);
 
             // 1. NCMBに開閉データを保存
             var NCMBClass = ncmb.DataStore(this.classname);
