@@ -5,8 +5,8 @@ module.exports = function(RED) {
     function NCMBDataStore(config) {
 
         RED.nodes.createNode(this,config);
-        this.appkey = config.appkey;
-        this.clikey = config.clikey;
+        this.applicationkey = config.applicationkey;
+        this.clientkey = config.clientkey;
         this.classname = config.classname;
         this.fieldname = config.fieldname;
         this.sendpush = config.sendpush;
@@ -18,20 +18,20 @@ module.exports = function(RED) {
         var node = this;
 
         this.on('input', function(msg) {
-            //(0) NCMB初期化
-            var ncmb = new NCMB(this.appkey, this.clikey);
+            // 0. NCMBの初期化
+            var ncmb = new NCMB(this.applicationkey, this.clientkey);
 
-            //(1) NCMBに開閉データを保存
+            // 1. NCMBに開閉データを保存
             var NCMBClass = ncmb.DataStore(this.classname);
             var ncmbClass = new NCMBClass();
             ncmbClass.set(this.fieldname, msg.payload);
             ncmbClass.save();
 
-　　　　　　　//(２) NCMBにプッシュ通知を登録
+            // 2. NCMBにプッシュ通知を登録
             if(this.sendpush == "yes") {
               var push = new ncmb.Push();
 
-              //2.1 setup target
+              // 2.1. プッシュ通知を送るターゲットの設定
               var target = [];
               if (this.sendandroid ^ this.sendios) {
                 if (this.sendandroid) {
@@ -43,7 +43,7 @@ module.exports = function(RED) {
                 target = ["android","ios"];
               }
 
-              //2.2 setup push message
+              // 2.2. プッシュ通知のメッセージを設定
               if ((this.sendtimeopen == true) && (msg.payload == 0 )) {
                   push.set("immediateDeliveryFlag", true)
                       .set("message", "Door is opened now")

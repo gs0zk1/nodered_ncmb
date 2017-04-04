@@ -2,16 +2,13 @@
     "name"         : "node-red-ncmb-datastore",
     "version"      : "0.0.1",
     "description"  : "NIFTY Cloud mobile backend DataStore node for node-red",
-    "dependencies": {
-    },
     "keywords": [ "node-red" ],
     "node-red"     : {
        "nodes": {
-          "ncmbds": "ncmbds/ncmbds.js" 
+          "ncmbds": "ncmbds/ncmbds.js"
        }
     },
     "dependencies": {
-      "ncmb": "~2.0.2" 
+      "ncmb": "~2.0.2"
     }
 }
-
